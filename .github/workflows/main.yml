@@ -1,0 +1,22 @@
+name: Teste Docker com Variavel
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      MINHA_VARIAVEL: "valor_do_github_actions"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker
+        run: |
+          docker build \
+            --build-arg MINHA_VARIAVEL=$MINHA_VARIAVEL \
+            -t teste:latest .
